@@ -23,25 +23,19 @@ public class Main {
             System.out.print("Введите страну: ");
             String country = sc.nextLine();
             if (country.equals("end")) {
-                System.out.println("Количество различных стран доставки: " + set.size());
-                System.out.println("Программа завершена");
-                return;
+                break;
             }
             System.out.print("Введите город: ");
             String city = sc.nextLine();
             if (city.equals("end")) {
-                System.out.println("Количество различных стран доставки: " + set.size());
-                System.out.println("Программа завершена");
-                return;
+                break;
             }
             try {
                 int weight;
                 System.out.print("Введите вес (кг): ");
                 String weightStr = sc.nextLine();
                 if (weightStr.equals("end")) {
-                    System.out.println("Количество различных стран доставки: " + set.size());
-                    System.out.println("Программа завершена");
-                    return;
+                    break;
                 } else {
                     weight = Integer.parseInt(weightStr);
                 }
@@ -62,5 +56,7 @@ public class Main {
                 System.out.println("!!!Вы ввели не число!!!");
             }
         }
+        System.out.println("Количество различных стран доставки: " + set.size());
+        System.out.println("Программа завершена");
     }
 }
