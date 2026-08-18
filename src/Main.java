@@ -18,6 +18,7 @@ public class Main {
         costPerAddress.put(new Address("США", "Калифорния"), 5000);
 
         Scanner sc = new Scanner(System.in);
+        int priceAll = 0;
         while (true) {
             System.out.println("Заполнение нового заказа");
             System.out.print("Введите страну: ");
@@ -39,16 +40,17 @@ public class Main {
                 } else {
                     weight = Integer.parseInt(weightStr);
                 }
-                int priceKg = 0;
+                int price = 0;
                 for (Map.Entry<Address, Integer> kv : costPerAddress.entrySet()) {
                     if (kv.getKey().getCountry().equals(country) && kv.getKey().getCity().equals(city)) {
-                        priceKg = kv.getValue();
+                        price = weight * kv.getValue();
+                        priceAll += price;
                         set.add(kv.getKey().getCountry());
                     }
                 }
-                if (priceKg != 0) {
-                    System.out.println("Стоимость доставки составит: " + priceKg);
-                    System.out.println("Общая стоимость всех доставок: " + priceKg * weight);
+                if (price != 0) {
+                    System.out.println("Стоимость доставки составит: " + price);
+                    System.out.println("Общая стоимость всех доставок: " + priceAll);
                 } else {
                     System.out.println("Доставки по этому адресу нет");
                 }
