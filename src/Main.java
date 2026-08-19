@@ -21,6 +21,7 @@ public class Main {
         int priceAll = 0;
         while (true) {
             System.out.println("Заполнение нового заказа");
+            System.out.println("Для выхода введите 'end'");
             System.out.print("Введите страну: ");
             String country = sc.nextLine();
             if (country.equals("end")) {
@@ -41,11 +42,14 @@ public class Main {
                     weight = Integer.parseInt(weightStr);
                 }
                 int price = 0;
-                for (Map.Entry<Address, Integer> kv : costPerAddress.entrySet()) {
-                    if (kv.getKey().getCountry().equals(country) && kv.getKey().getCity().equals(city)) {
-                        price = weight * kv.getValue();
+                Address userAddress = new Address(country, city);
+                for (Map.Entry<Address, Integer> deliveryAddress : costPerAddress.entrySet()) {
+                    //if (deliveryAddress.getKey().getCountry().equals(country) &&
+                    // deliveryAddress.getKey().getCity().equals(city)) { //первый вариант решения
+                    if (userAddress.equals(deliveryAddress)) {
+                        price = weight * deliveryAddress.getValue();
                         priceAll += price;
-                        set.add(kv.getKey().getCountry());
+                        set.add(deliveryAddress.getKey().getCountry());
                     }
                 }
                 if (price != 0) {
