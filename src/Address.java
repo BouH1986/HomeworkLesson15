@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class Address {
+class Address {
     private final String country;
     private final String city;
 
@@ -9,17 +9,14 @@ public class Address {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
     //переопределяем метод equals, чтобы можно было сравнивать два объекта Address по обоим полям
     @Override
     public boolean equals(Object obj) {
+        //не монго ИИ
+        // проверка на то что это одна ячейка памяти
+        if (this == obj) return true;
+        //проверка не передали ли null и проверка на соответствие классов
+        if (obj == null || getClass() != obj.getClass()) return false;
         Address adr = (Address) obj;
         return country.equals(adr.country) && city.equals(adr.city);
     }

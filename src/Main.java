@@ -1,13 +1,13 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws RuntimeException {
-
-        //map - для адресов и цен
-        Map<Address, Integer> costPerAddress = new HashMap<>();
+    public static void main(String[] args) {
 
         //set - для получения списка стран доставок
         Set<String> set = new HashSet<>();
+
+        //map - для адресов и цен
+        Map<Address, Integer> costPerAddress = new HashMap<>();
 
         costPerAddress.put(new Address("Россия", "Самара"), 1000);
         costPerAddress.put(new Address("Россия", "Москва"), 2000);
@@ -24,45 +24,41 @@ public class Main {
             System.out.println("Для выхода введите 'end'");
             System.out.print("Введите страну: ");
             String country = sc.nextLine();
-            if (country.equals("end")) {
+            //у 'end' вызываем метод equals, а не у введенного значения,
+            // для избежания возможных ошибок с null
+            if ("end".equals(country)) {
                 break;
             }
             System.out.print("Введите город: ");
             String city = sc.nextLine();
-            if (city.equals("end")) {
+            if ("end".equals(city)) {
                 break;
             }
+            System.out.print("Введите вес (кг): ");
+            String weightStr = sc.nextLine();
+            if ("end".equals(weightStr)) {
+                break;
+            }
+
             try {
-                int weight;
-                System.out.print("Введите вес (кг): ");
-                String weightStr = sc.nextLine();
-                if (weightStr.equals("end")) {
-                    break;
-                } else {
-                    weight = Integer.parseInt(weightStr);
-                }
-                int price = 0;
+                int weight = Integer.parseInt(weightStr);
+                //создаем объект с введенными пользователем данными
                 Address userAddress = new Address(country, city);
-                for (Map.Entry<Address, Integer> deliveryAddress : costPerAddress.entrySet()) {
-
-                    //if (deliveryAddress.getKey().getCountry().equals(country) &&
-                    // deliveryAddress.getKey().getCity().equals(city)) { //первый вариант решения
-
-                    if (userAddress.equals(deliveryAddress.getKey())) {
-                        price = weight * deliveryAddress.getValue();
-                        priceAll += price;
-                        set.add(deliveryAddress.getKey().getCountry());
-                    }
-                }
-                if (price != 0) {
+                //если объект содержится в ключе мапы
+                if (costPerAddress.containsKey(userAddress)) {
+                    int price = costPerAddress.get(userAddress) * weight;
                     System.out.println("Стоимость доставки составит: " + price);
+                    priceAll += price;
                     System.out.println("Общая стоимость всех доставок: " + priceAll);
+                    set.add(country);
                 } else {
                     System.out.println("Доставки по этому адресу нет");
                 }
-            } catch (RuntimeException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("!!!Вы ввели не число!!!");
             }
+
+            System.out.println();
         }
         System.out.println("Количество различных стран доставки: " + set.size());
         System.out.println("Программа завершена");
