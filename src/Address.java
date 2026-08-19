@@ -1,8 +1,8 @@
 import java.util.Objects;
 
 public class Address {
-    private String country;
-    private String city;
+    private final String country;
+    private final String city;
 
     public Address(String country, String city) {
         this.country = country;
