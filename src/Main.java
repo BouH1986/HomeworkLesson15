@@ -46,10 +46,11 @@ public class Main {
                 Address userAddress = new Address(country, city);
                 //если объект содержится в ключе мапы
                 if (costPerAddress.containsKey(userAddress)) {
+                    //метод get возвращает значение по ключу
                     int price = costPerAddress.get(userAddress) * weight;
-                    System.out.println("Стоимость доставки составит: " + price);
+                    System.out.println("Стоимость доставки составит: " + price + " руб.");
                     priceAll += price;
-                    System.out.println("Общая стоимость всех доставок: " + priceAll);
+                    System.out.println("Общая стоимость всех доставок: " + priceAll + " руб.");
                     set.add(country);
                 } else {
                     System.out.println("Доставки по этому адресу нет");
