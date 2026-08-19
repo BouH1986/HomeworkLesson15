@@ -46,7 +46,7 @@ public class Main {
                 for (Map.Entry<Address, Integer> deliveryAddress : costPerAddress.entrySet()) {
                     //if (deliveryAddress.getKey().getCountry().equals(country) &&
                     // deliveryAddress.getKey().getCity().equals(city)) { //первый вариант решения
-                    if (userAddress.equals(deliveryAddress)) {
+                    if (userAddress.equals(deliveryAddress.getKey())) {
                         price = weight * deliveryAddress.getValue();
                         priceAll += price;
                         set.add(deliveryAddress.getKey().getCountry());
